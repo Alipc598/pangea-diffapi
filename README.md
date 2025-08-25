@@ -25,3 +25,17 @@ Invoke-RestMethod -Method Post -Uri "http://localhost:5000/v1/diff/123/left" -Co
 Invoke-RestMethod -Method Post -Uri "http://localhost:5000/v1/diff/123/right" -ContentType "application/custom" -Body $body
 Invoke-RestMethod -Method Get  -Uri "http://localhost:5000/v1/diff/123"
 ```
+
+## Limitations
+
+- Stores data in memory only (lost on restart).
+- Diff works on .NET string chars, not byte-level.
+- Only handles equal-length diffs; no insert/delete detection.
+- No auth, no rate-limit, no payload size cap (demo only).
+
+## Possible improvements
+- Use DB for persistence instead of in-memory.
+- Add DELETE /v1/diff/{id} to clean stored pairs.
+- Support byte-level or grapheme-aware diff.
+- Add Swagger/OpenAPI docs for testing.
+- Add auth, rate-limit, and payload caps for prod use.
